@@ -1,5 +1,7 @@
 #include <iostream>
 #include <array>
+#include <map>
+#include <set>
 
 void process(std::istream& is = std::cin, std::ostream& os = std::cout)
 {
@@ -19,5 +21,26 @@ void process(std::istream& is = std::cin, std::ostream& os = std::cout)
     j = k - 'a';
     for(auto i = 0; i < idx[j]; ++i) {
         os << k << d[j][i] << "\n";
+    }
+}
+
+void process_alt(std::istream& is = std::cin, std::ostream& os = std::cout)
+{
+    
+    std::map<char, std::set<char>> table;
+    int n;
+
+    is >> n;
+    char first, second;
+    for (auto i = 0; i < n; ++i)
+    {
+        is >> first >> second;
+        table[first].insert(second);
+    }
+
+    is >> first;
+    for (const auto& res : table[first])
+    {
+        os << first << res << '\n';
     }
 }

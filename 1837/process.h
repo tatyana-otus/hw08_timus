@@ -1,60 +1,61 @@
 #include <iostream>
 #include <map>
 #include <set>
+#include <list>
 #include <string>
 
 
 void process(std::istream& is = std::cin, std::ostream& os = std::cout)
 {
-    std::map<std::string, std::set<std::string>> all;
-    std::map<std::string, int> one;
+    std::map<std::string, std::set<std::string>> all_participant;
+    std::map<std::string, int> one_participant;
 
     int n;
-    std::string s1, s2, s3;
+    std::string participant_1, participant_2, participant_3;
     is >> n;
     
     for(auto i = 0; i < n; ++i){
         
-        is >> s1;
-        is >> s2;
-        is >> s3;
+        is >> participant_1;
+        is >> participant_2;
+        is >> participant_3;
 
-        all[s1].insert(s2);
-        all[s1].insert(s3);
+        all_participant[participant_1].insert(participant_2);
+        all_participant[participant_1].insert(participant_3);
         
-        all[s2].insert(s1);
-        all[s2].insert(s3);
+        all_participant[participant_2].insert(participant_1);
+        all_participant[participant_2].insert(participant_3);
         
-        all[s3].insert(s2);
-        all[s3].insert(s1); 
+        all_participant[participant_3].insert(participant_2);
+        all_participant[participant_3].insert(participant_1); 
         
-        one[s1] = -1;
-        one[s2] = -1;
-        one[s3] = -1;
+        one_participant[participant_1] = -1;
+        one_participant[participant_2] = -1;
+        one_participant[participant_3] = -1;
     }
 
-    std::set<std::string> tmp1, tmp2;
-    if(all.find("Isenbaev") != all.end()){
-        tmp1.insert("Isenbaev");
-        one["Isenbaev"] = 0;
+    std::list<std::string> tmp1, tmp2;
+    if(all_participant.find("Isenbaev") != all_participant.end()){
+        tmp1.push_back("Isenbaev");
+        one_participant["Isenbaev"] = 0;
     }    
     int cnt = 1;
     while (tmp1.size() > 0) {
         for(const auto& i : tmp1) {
-            for(const auto& j : all[i] ){
-                if(one[j] == -1){
-                    one[j] = cnt;
-                    tmp2.insert(j);
+            for(const auto& j : all_participant[i] ){
+                if(one_participant[j] == -1){
+                    one_participant[j] = cnt;
+                    tmp2.push_back(j);
                 }           
             }
-            all.erase(i);
+            all_participant.erase(i);
         }
         std::swap(tmp1, tmp2);
         tmp2.clear();
         ++cnt;
     }
     
-    for(const auto& i : one){
+    for(const auto& i : one_participant){
         if(i.second != -1) {
             os << i.first << " " <<  i.second << "\n";
         }

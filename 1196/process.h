@@ -21,7 +21,7 @@ void process(std::istream& is = std::cin, std::ostream& os = std::cout)
     for(auto i = 0; i < n; ++i){
       
         is >> d;
-        if(std::binary_search(data.begin(), data.end(), d)) {
+        if(std::binary_search(data.cbegin(), data.cend(), d)) {
             ++cnt;
         }
     }    

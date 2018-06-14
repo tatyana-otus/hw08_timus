@@ -34,4 +34,30 @@ BOOST_AUTO_TEST_CASE(base)
     BOOST_CHECK_EQUAL( oss.str(), out_data );
 }
 
+BOOST_AUTO_TEST_CASE(base_alt)
+{
+    std::stringstream iss;
+    std::stringstream oss;
+
+    std::string  in_data =
+    "6\n"
+    "na\n"
+    "no\n"
+    "ni\n"
+    "ki\n"
+    "ka\n"
+    "ku\n"
+    "k\n";
+   
+    std::string out_data =
+    "ka\n"
+    "ki\n"
+    "ku\n";
+
+    iss << in_data;
+    process_alt(iss, oss);
+
+    BOOST_CHECK_EQUAL( oss.str(), out_data );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
